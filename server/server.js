@@ -23,3 +23,6 @@ app.listen(PORT, (err) => {
         console.log(`API key is ${googleApiKey}`);
     }
 })
+
+//fetch call from front to back end, calls google maps api, turns city into long/lat
+//then takes that and puts into national forecast
