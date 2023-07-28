@@ -1,9 +1,14 @@
-const express = require('express');
-const cors = require('cors');
-require('dotenv').config();
+import express from 'express';
+import cors from 'cors';
+import * as dotenv from 'dotenv';
+import { geoApp } from './routes/geoApi.js';
+import { weatherApp } from './routes/weatherApi.js'
+dotenv.config();
 
-googleApiKey = process.env.GOOGLE_API_KEY;
+let key = process.env.WEATHER_API_KEY;
+let email = process.env.EMAIL;
 
+//http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&appid={API key}
 const app = express();
 const PORT = 3000;
 
@@ -12,15 +17,29 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
-
+    res.send({message: "Node server is running"});
 })
 
-app.listen(PORT, (err) => {
+app.post('/api', async (req, res) => {
+    const data = req.body;
+    //console.log(`Data sent was: ${data.city}`);
+    try {
+        const geoData = await geoApp(data.city, key);
+        const weatherData = await weatherApp(geoData[0].lon, geoData[0].lat, email);
+        res.json({
+            weatherData
+        });
+    } catch (error) {
+        console.error('error occurred when attempting API');
+    }
+})
+
+app.listen(PORT, async (err) => {
     if (err) {
         throw err;
     } else {
         console.log(`app is listening on port ${PORT}`);
-        console.log(`API key is ${googleApiKey}`);
+        //console.log(`API key is ${googleApiKey}`);
     }
 })
 

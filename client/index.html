@@ -4,38 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" type="text/css " href="./css/index.css">
 </head>
 <body>
-    <div class="container">
+    <h2>morrisville,VT,US</h2>
+    <div id="searc-container">
         <label for="search"></label>
         <input type="text" name="search" id="search">
-        <button onclick="searchFunc()">Search</button>
+        <!-- Update to send fetch requests with state as well -->
+        <!-- Update to get states from a .json file? -->
+        <label for="states">State: </label>
+        <select name="state" id="state">
+            <option value="VT">VT</option>
+        </select>
+        <button id="searchButton">Search</button>
         <h1 id="city"></h1>
     </div>
-
-    <script>
-        async function searchFunc() {
-            let api = "https://api.weather.gov/points/";
-            let searchText = document.querySelector("#search");
-            document.querySelector("h1").innerHTML = searchText.value;
-            console.log(searchText.value);
-            try {
-                let result = await fetch("https://api.weather.gov/points/39.7456,-97.0892");
-                let data = await result.json();
-                console.log(data);
-            } catch (err) {
-                throw err;
-            }
-
-            searchText.value = '';
-        }
-
-        document.querySelector("#search").addEventListener('keypress', (event) => {
-            if (event.key === "Enter") {
-                event.preventDefault();
-                document.querySelector("button").click();
-            }
-        })
-    </script>
+    <div id="forecast-container"></div>
+    <script defer src="index.js" type="module"></script>
 </body>
 </html>
