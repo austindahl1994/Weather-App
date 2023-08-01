@@ -8,14 +8,9 @@ function addElement(type, content, card) {
 
 function createCard(forecast, card) {
     let forecastElement = document.querySelector('#forecast-container');
-    addElement('p', forecast.shortDetails, card);
-    addElement('p', forecast.longDetails, card);
-    addElement('p', forecast.isDay, card);
-    addElement('p', forecast.name, card);
-    addElement('p', forecast.precipitationPercent, card);
-    addElement('p', forecast.temp, card);
-    addElement('p', forecast.windDirection, card);
-    addElement('p', forecast.windSpeed, card);
+    for (let prop in forecast) {
+        addElement('p', forecast[prop], card)
+    }
     forecastElement.appendChild(card);
 }
 

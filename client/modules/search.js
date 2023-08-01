@@ -8,7 +8,7 @@ async function search(city) {
             body: JSON.stringify({'city': city})
         });
         const data = await response.json();
-        //console.log(data);
+        console.log(data);
         return data.weatherData.properties.periods;
     } catch (error) {
         console.error(`Error during search: ${error}`);

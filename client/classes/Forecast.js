@@ -9,4 +9,24 @@ export default class Forecast {
         this.windDirection = windDirection;
         this.windSpeed = windSpeed;
     }
+
+    createCard() {
+
+    }
+
+    createElement() {
+        this.parseText("some string"); //
+    }
+
+    setBackground() {
+
+    }
+
+    parseText() {
+
+    }
+    // add images that I make myself? GIFs?
+    //parse and add new classes to elements
+    //check for percip chance, if null
+    //images for wind speed, precip chance, weather, wind direction
 }
